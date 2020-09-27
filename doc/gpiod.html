@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module gpiod</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>gpiod</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/lib/python3/dist-packages/gpiod.cpython-38-aarch64-linux-gnu.so">/usr/lib/python3/dist-packages/gpiod.cpython-38-aarch64-linux-gnu.so</a></font></td></tr></table>
+    <p><tt>Python&nbsp;bindings&nbsp;for&nbsp;libgpiod.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;wraps&nbsp;the&nbsp;native&nbsp;C&nbsp;API&nbsp;of&nbsp;libgpiod&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;python&nbsp;classes.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="gpiod.html#Chip">Chip</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gpiod.html#ChipIter">ChipIter</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gpiod.html#Line">Line</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gpiod.html#LineBulk">LineBulk</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gpiod.html#LineEvent">LineEvent</a>
+</font></dt><dt><font face="helvetica, arial"><a href="gpiod.html#LineIter">LineIter</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Chip">class <strong>Chip</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;GPIO&nbsp;chip.<br>
+&nbsp;<br>
+<a href="#Chip">Chip</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;manages&nbsp;all&nbsp;resources&nbsp;associated&nbsp;with&nbsp;the&nbsp;GPIO&nbsp;chip<br>
+it&nbsp;represents.<br>
+&nbsp;<br>
+The&nbsp;gpiochip&nbsp;device&nbsp;file&nbsp;is&nbsp;opened&nbsp;during&nbsp;the&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;construction.<br>
+The&nbsp;<a href="#Chip">Chip</a>&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;constructor&nbsp;takes&nbsp;a&nbsp;description&nbsp;string&nbsp;as&nbsp;argument&nbsp;the<br>
+meaning&nbsp;of&nbsp;which&nbsp;depends&nbsp;on&nbsp;the&nbsp;second,&nbsp;optional&nbsp;parameter&nbsp;which&nbsp;defines<br>
+the&nbsp;way&nbsp;the&nbsp;description&nbsp;string&nbsp;should&nbsp;be&nbsp;interpreted.&nbsp;The&nbsp;available<br>
+options&nbsp;are:&nbsp;OPEN_BY_LABEL,&nbsp;OPEN_BY_NAME,&nbsp;OPEN_BY_NUMBER,&nbsp;OPEN_BY_PATH,<br>
+and&nbsp;OPEN_LOOKUP.&nbsp;The&nbsp;last&nbsp;option&nbsp;means&nbsp;that&nbsp;libgpiod&nbsp;should&nbsp;open&nbsp;the&nbsp;chip<br>
+based&nbsp;on&nbsp;the&nbsp;best&nbsp;guess&nbsp;what&nbsp;the&nbsp;path&nbsp;is.&nbsp;This&nbsp;is&nbsp;also&nbsp;the&nbsp;default&nbsp;if&nbsp;the<br>
+second&nbsp;argument&nbsp;is&nbsp;missing.<br>
+&nbsp;<br>
+Callers&nbsp;must&nbsp;close&nbsp;the&nbsp;chip&nbsp;by&nbsp;calling&nbsp;the&nbsp;<a href="#Chip-close">close</a>()&nbsp;method&nbsp;when&nbsp;it's&nbsp;no<br>
+longer&nbsp;used.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chip&nbsp;=&nbsp;gpiod.<a href="#Chip">Chip</a>('gpiochip0',&nbsp;gpiod.<a href="#Chip">Chip</a>.OPEN_BY_NAME)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;do_something(chip)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chip.<a href="#Chip-close">close</a>()<br>
+&nbsp;<br>
+The&nbsp;gpiod.<a href="#Chip">Chip</a>&nbsp;class&nbsp;also&nbsp;supports&nbsp;controlled&nbsp;execution&nbsp;('with'&nbsp;statement).<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;gpiod.<a href="#Chip">Chip</a>('0',&nbsp;gpiod.<a href="#Chip">Chip</a>.OPEN_BY_NUMBER)&nbsp;as&nbsp;chip:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something(chip)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Chip-__enter__"><strong>__enter__</strong></a>(...)</dt><dd><tt>Controlled&nbsp;execution&nbsp;enter&nbsp;callback.</tt></dd></dl>
+
+<dl><dt><a name="Chip-__exit__"><strong>__exit__</strong></a>(...)</dt><dd><tt>Controlled&nbsp;execution&nbsp;exit&nbsp;callback.</tt></dd></dl>
+
+<dl><dt><a name="Chip-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Chip-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="Chip-close"><strong>close</strong></a>(...)</dt><dd><tt><a href="#Chip-close">close</a>()&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Close&nbsp;the&nbsp;associated&nbsp;gpiochip&nbsp;descriptor.&nbsp;The&nbsp;chip&nbsp;<a href="builtins.html#object">object</a>&nbsp;must&nbsp;no&nbsp;longer<br>
+be&nbsp;used&nbsp;after&nbsp;this&nbsp;method&nbsp;is&nbsp;called.</tt></dd></dl>
+
+<dl><dt><a name="Chip-find_line"><strong>find_line</strong></a>(...)</dt><dd><tt><a href="#Chip-find_line">find_line</a>(name)&nbsp;-&gt;&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;None<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;GPIO&nbsp;line&nbsp;by&nbsp;name.<br>
+&nbsp;<br>
+&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Line">Line</a>&nbsp;name&nbsp;(string)<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;None&nbsp;if&nbsp;line&nbsp;with&nbsp;given&nbsp;name&nbsp;is&nbsp;not<br>
+associated&nbsp;with&nbsp;this&nbsp;chip.</tt></dd></dl>
+
+<dl><dt><a name="Chip-find_lines"><strong>find_lines</strong></a>(...)</dt><dd><tt><a href="#Chip-find_lines">find_lines</a>(names)&nbsp;-&gt;&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+Look&nbsp;up&nbsp;a&nbsp;set&nbsp;of&nbsp;lines&nbsp;by&nbsp;their&nbsp;names.<br>
+&nbsp;<br>
+&nbsp;&nbsp;names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Sequence&nbsp;of&nbsp;line&nbsp;names.<br>
+&nbsp;<br>
+Unlike&nbsp;<a href="#Chip-find_line">find_line</a>(),&nbsp;this&nbsp;method&nbsp;raises&nbsp;an&nbsp;exception&nbsp;if&nbsp;at&nbsp;least&nbsp;one&nbsp;line<br>
+from&nbsp;the&nbsp;list&nbsp;doesn't&nbsp;exist.</tt></dd></dl>
+
+<dl><dt><a name="Chip-get_all_lines"><strong>get_all_lines</strong></a>(...)</dt><dd><tt><a href="#Chip-get_all_lines">get_all_lines</a>()&nbsp;-&gt;&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+Get&nbsp;all&nbsp;lines&nbsp;exposed&nbsp;by&nbsp;this&nbsp;<a href="#Chip">Chip</a>.</tt></dd></dl>
+
+<dl><dt><a name="Chip-get_line"><strong>get_line</strong></a>(...)</dt><dd><tt><a href="#Chip-get_line">get_line</a>(offset)&nbsp;-&gt;&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;GPIO&nbsp;line&nbsp;at&nbsp;given&nbsp;offset.<br>
+&nbsp;<br>
+&nbsp;&nbsp;offset<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Line">Line</a>&nbsp;offset&nbsp;(integer)</tt></dd></dl>
+
+<dl><dt><a name="Chip-get_lines"><strong>get_lines</strong></a>(...)</dt><dd><tt><a href="#Chip-get_lines">get_lines</a>(offsets)&nbsp;-&gt;&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+Get&nbsp;a&nbsp;set&nbsp;of&nbsp;GPIO&nbsp;lines&nbsp;by&nbsp;their&nbsp;offsets.<br>
+&nbsp;<br>
+&nbsp;&nbsp;offsets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;lines&nbsp;offsets.</tt></dd></dl>
+
+<dl><dt><a name="Chip-label"><strong>label</strong></a>(...)</dt><dd><tt><a href="#Chip-label">label</a>()&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;label&nbsp;of&nbsp;the&nbsp;GPIO&nbsp;chip</tt></dd></dl>
+
+<dl><dt><a name="Chip-name"><strong>name</strong></a>(...)</dt><dd><tt><a href="#Chip-name">name</a>()&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;GPIO&nbsp;chip</tt></dd></dl>
+
+<dl><dt><a name="Chip-num_lines"><strong>num_lines</strong></a>(...)</dt><dd><tt><a href="#Chip-num_lines">num_lines</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;number&nbsp;of&nbsp;lines&nbsp;exposed&nbsp;by&nbsp;this&nbsp;GPIO&nbsp;chip.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Chip-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>OPEN_BY_LABEL</strong> = 4</dl>
+
+<dl><dt><strong>OPEN_BY_NAME</strong> = 2</dl>
+
+<dl><dt><strong>OPEN_BY_NUMBER</strong> = 5</dl>
+
+<dl><dt><strong>OPEN_BY_PATH</strong> = 3</dl>
+
+<dl><dt><strong>OPEN_LOOKUP</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ChipIter">class <strong>ChipIter</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Allows&nbsp;to&nbsp;iterate&nbsp;over&nbsp;all&nbsp;GPIO&nbsp;chips&nbsp;in&nbsp;the&nbsp;system.<br>
+&nbsp;<br>
+The&nbsp;<a href="#ChipIter">ChipIter</a>'s&nbsp;constructor&nbsp;takes&nbsp;no&nbsp;arguments.<br>
+&nbsp;<br>
+Each&nbsp;iteration&nbsp;yields&nbsp;the&nbsp;next&nbsp;open&nbsp;GPIO&nbsp;chip&nbsp;handle.&nbsp;The&nbsp;caller&nbsp;is<br>
+responsible&nbsp;for&nbsp;closing&nbsp;each&nbsp;chip<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;chip&nbsp;in&nbsp;gpiod.<a href="#ChipIter">ChipIter</a>():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something_with_chip(chip)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chip.close()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ChipIter-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="ChipIter-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="ChipIter-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="ChipIter-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Line">class <strong>Line</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;GPIO&nbsp;line.<br>
+&nbsp;<br>
+The&nbsp;lifetime&nbsp;of&nbsp;this&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;managed&nbsp;by&nbsp;the&nbsp;chip&nbsp;that&nbsp;owns&nbsp;it.&nbsp;Once<br>
+the&nbsp;corresponding&nbsp;gpiod.<a href="#Chip">Chip</a>&nbsp;is&nbsp;closed,&nbsp;a&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;must&nbsp;not&nbsp;be<br>
+used.<br>
+&nbsp;<br>
+<a href="#Line">Line</a>&nbsp;objects&nbsp;can&nbsp;only&nbsp;be&nbsp;created&nbsp;by&nbsp;the&nbsp;owning&nbsp;chip.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Line-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="Line-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="Line-active_state"><strong>active_state</strong></a>(...)</dt><dd><tt><a href="#Line-active_state">active_state</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;active&nbsp;state&nbsp;setting&nbsp;of&nbsp;this&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-consumer"><strong>consumer</strong></a>(...)</dt><dd><tt><a href="#Line-consumer">consumer</a>()&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;consumer&nbsp;string&nbsp;of&nbsp;the&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-direction"><strong>direction</strong></a>(...)</dt><dd><tt><a href="#Line-direction">direction</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;direction&nbsp;setting&nbsp;of&nbsp;this&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-event_get_fd"><strong>event_get_fd</strong></a>(...)</dt><dd><tt><a href="#Line-event_get_fd">event_get_fd</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;event&nbsp;file&nbsp;descriptor&nbsp;number&nbsp;associated&nbsp;with&nbsp;this&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-event_read"><strong>event_read</strong></a>(...)</dt><dd><tt><a href="#Line-event_read">event_read</a>()&nbsp;-&gt;&nbsp;gpiod.<a href="#LineEvent">LineEvent</a>&nbsp;<a href="builtins.html#object">object</a><br>
+&nbsp;<br>
+Read&nbsp;a&nbsp;single&nbsp;line&nbsp;event&nbsp;from&nbsp;this&nbsp;GPIO&nbsp;line&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Line-event_wait"><strong>event_wait</strong></a>(...)</dt><dd><tt><a href="#Line-event_wait">event_wait</a>([sec[&nbsp;,nsec]])&nbsp;-&gt;&nbsp;boolean<br>
+&nbsp;<br>
+Wait&nbsp;for&nbsp;a&nbsp;line&nbsp;event&nbsp;to&nbsp;occur&nbsp;on&nbsp;this&nbsp;GPIO&nbsp;line.<br>
+&nbsp;<br>
+&nbsp;&nbsp;sec<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait&nbsp;before&nbsp;timeout.<br>
+&nbsp;&nbsp;nsec<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;nanoseconds&nbsp;to&nbsp;wait&nbsp;before&nbsp;timeout.<br>
+&nbsp;<br>
+Returns&nbsp;True&nbsp;if&nbsp;an&nbsp;event&nbsp;occurred&nbsp;on&nbsp;this&nbsp;line&nbsp;before&nbsp;timeout.&nbsp;False<br>
+otherwise.</tt></dd></dl>
+
+<dl><dt><a name="Line-get_value"><strong>get_value</strong></a>(...)</dt><dd><tt><a href="#Line-get_value">get_value</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Read&nbsp;the&nbsp;current&nbsp;value&nbsp;of&nbsp;this&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-is_open_drain"><strong>is_open_drain</strong></a>(...)</dt><dd><tt><a href="#Line-is_open_drain">is_open_drain</a>()&nbsp;-&gt;&nbsp;boolean<br>
+&nbsp;<br>
+Check&nbsp;if&nbsp;this&nbsp;line&nbsp;represents&nbsp;an&nbsp;open-drain&nbsp;GPIO.</tt></dd></dl>
+
+<dl><dt><a name="Line-is_open_source"><strong>is_open_source</strong></a>(...)</dt><dd><tt><a href="#Line-is_open_source">is_open_source</a>()&nbsp;-&gt;&nbsp;boolean<br>
+&nbsp;<br>
+Check&nbsp;if&nbsp;this&nbsp;line&nbsp;represents&nbsp;an&nbsp;open-source&nbsp;GPIO.</tt></dd></dl>
+
+<dl><dt><a name="Line-is_requested"><strong>is_requested</strong></a>(...)</dt><dd><tt><a href="#Line-is_requested">is_requested</a>()&nbsp;-&gt;&nbsp;boolean<br>
+&nbsp;<br>
+Check&nbsp;if&nbsp;this&nbsp;user&nbsp;has&nbsp;ownership&nbsp;of&nbsp;this&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-is_used"><strong>is_used</strong></a>(...)</dt><dd><tt><a href="#Line-is_used">is_used</a>()&nbsp;-&gt;&nbsp;boolean<br>
+&nbsp;<br>
+Check&nbsp;if&nbsp;this&nbsp;line&nbsp;is&nbsp;used&nbsp;by&nbsp;the&nbsp;kernel&nbsp;or&nbsp;other&nbsp;user&nbsp;space&nbsp;process.</tt></dd></dl>
+
+<dl><dt><a name="Line-name"><strong>name</strong></a>(...)</dt><dd><tt><a href="#Line-name">name</a>()&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-offset"><strong>offset</strong></a>(...)</dt><dd><tt><a href="#Line-offset">offset</a>()&nbsp;-&gt;&nbsp;integer<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;offset&nbsp;of&nbsp;the&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-owner"><strong>owner</strong></a>(...)</dt><dd><tt><a href="#Line-owner">owner</a>()&nbsp;-&gt;&nbsp;<a href="#Chip">Chip</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;owning&nbsp;the&nbsp;line<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;GPIO&nbsp;chip&nbsp;owning&nbsp;this&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-release"><strong>release</strong></a>(...)</dt><dd><tt><a href="#Line-release">release</a>()&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Release&nbsp;this&nbsp;GPIO&nbsp;line.</tt></dd></dl>
+
+<dl><dt><a name="Line-request"><strong>request</strong></a>(...)</dt><dd><tt><a href="#Line-request">request</a>(consumer[,&nbsp;type[,&nbsp;flags[,&nbsp;default_vals]]])&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Request&nbsp;this&nbsp;GPIO&nbsp;line.<br>
+&nbsp;<br>
+&nbsp;&nbsp;consumer<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;of&nbsp;the&nbsp;consumer.<br>
+&nbsp;&nbsp;type<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;of&nbsp;the&nbsp;request.<br>
+&nbsp;&nbsp;flags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Other&nbsp;configuration&nbsp;flags.<br>
+&nbsp;&nbsp;default_val<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;value&nbsp;of&nbsp;this&nbsp;line.<br>
+Note:&nbsp;default_vals&nbsp;argument&nbsp;(sequence&nbsp;of&nbsp;default&nbsp;values&nbsp;passed&nbsp;down&nbsp;to<br>
+<a href="#LineBulk">LineBulk</a>.<a href="#Line-request">request</a>())&nbsp;is&nbsp;still&nbsp;supported&nbsp;for&nbsp;backward&nbsp;compatibility&nbsp;but&nbsp;is<br>
+now&nbsp;deprecated&nbsp;when&nbsp;requesting&nbsp;single&nbsp;lines.</tt></dd></dl>
+
+<dl><dt><a name="Line-set_value"><strong>set_value</strong></a>(...)</dt><dd><tt><a href="#Line-set_value">set_value</a>(value)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Set&nbsp;the&nbsp;value&nbsp;of&nbsp;this&nbsp;GPIO&nbsp;line.<br>
+&nbsp;<br>
+&nbsp;&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;New&nbsp;value&nbsp;(integer)</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Line-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>ACTIVE_HIGH</strong> = 1</dl>
+
+<dl><dt><strong>ACTIVE_LOW</strong> = 2</dl>
+
+<dl><dt><strong>DIRECTION_INPUT</strong> = 1</dl>
+
+<dl><dt><strong>DIRECTION_OUTPUT</strong> = 2</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LineBulk">class <strong>LineBulk</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;set&nbsp;of&nbsp;GPIO&nbsp;lines.<br>
+&nbsp;<br>
+Objects&nbsp;of&nbsp;this&nbsp;type&nbsp;are&nbsp;immutable.&nbsp;The&nbsp;constructor&nbsp;takes&nbsp;as&nbsp;argument<br>
+a&nbsp;sequence&nbsp;of&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;objects.&nbsp;It&nbsp;doesn't&nbsp;accept&nbsp;objects&nbsp;of&nbsp;any&nbsp;other<br>
+type.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LineBulk-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-event_wait"><strong>event_wait</strong></a>(...)</dt><dd><tt><a href="#LineBulk-event_wait">event_wait</a>([sec[&nbsp;,nsec]])&nbsp;-&gt;&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;None<br>
+&nbsp;<br>
+Poll&nbsp;the&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;Object&nbsp;for&nbsp;line&nbsp;events.<br>
+&nbsp;<br>
+&nbsp;&nbsp;sec<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait&nbsp;before&nbsp;timeout.<br>
+&nbsp;&nbsp;nsec<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;nanoseconds&nbsp;to&nbsp;wait&nbsp;before&nbsp;timeout.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;references&nbsp;to&nbsp;lines&nbsp;on&nbsp;which<br>
+events&nbsp;occurred&nbsp;or&nbsp;None&nbsp;if&nbsp;we&nbsp;reached&nbsp;the&nbsp;timeout&nbsp;without&nbsp;any&nbsp;event<br>
+occurring.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-get_values"><strong>get_values</strong></a>(...)</dt><dd><tt><a href="#LineBulk-get_values">get_values</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;integers<br>
+&nbsp;<br>
+Read&nbsp;the&nbsp;values&nbsp;of&nbsp;all&nbsp;the&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.&nbsp;The&nbsp;index<br>
+of&nbsp;each&nbsp;value&nbsp;in&nbsp;the&nbsp;returned&nbsp;list&nbsp;corresponds&nbsp;with&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;line<br>
+in&nbsp;this&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-release"><strong>release</strong></a>(...)</dt><dd><tt><a href="#LineBulk-release">release</a>()&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Release&nbsp;all&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-request"><strong>request</strong></a>(...)</dt><dd><tt><a href="#LineBulk-request">request</a>(consumer[,&nbsp;type[,&nbsp;flags[,&nbsp;default_vals]]])&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Request&nbsp;all&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+&nbsp;&nbsp;consumer<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;of&nbsp;the&nbsp;consumer.<br>
+&nbsp;&nbsp;type<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type&nbsp;of&nbsp;the&nbsp;request.<br>
+&nbsp;&nbsp;flags<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Other&nbsp;configuration&nbsp;flags.<br>
+&nbsp;&nbsp;default_vals<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;default&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-set_values"><strong>set_values</strong></a>(...)</dt><dd><tt><a href="#LineBulk-set_values">set_values</a>(values)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Set&nbsp;the&nbsp;values&nbsp;of&nbsp;all&nbsp;the&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+&nbsp;&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&nbsp;of&nbsp;values&nbsp;(integers)&nbsp;to&nbsp;set.<br>
+&nbsp;<br>
+The&nbsp;number&nbsp;of&nbsp;values&nbsp;in&nbsp;the&nbsp;list&nbsp;passed&nbsp;as&nbsp;argument&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as<br>
+the&nbsp;number&nbsp;of&nbsp;lines&nbsp;held&nbsp;by&nbsp;this&nbsp;gpiod.<a href="#LineBulk">LineBulk</a>&nbsp;<a href="builtins.html#object">object</a>.&nbsp;The&nbsp;index&nbsp;of&nbsp;each<br>
+value&nbsp;corresponds&nbsp;with&nbsp;the&nbsp;index&nbsp;of&nbsp;each&nbsp;line&nbsp;in&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="LineBulk-to_list"><strong>to_list</strong></a>(...)</dt><dd><tt><a href="#LineBulk-to_list">to_list</a>()&nbsp;-&gt;&nbsp;list&nbsp;of&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;objects<br>
+&nbsp;<br>
+Convert&nbsp;this&nbsp;<a href="#LineBulk">LineBulk</a>&nbsp;to&nbsp;a&nbsp;list</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="LineBulk-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LineEvent">class <strong>LineEvent</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;a&nbsp;single&nbsp;GPIO&nbsp;line&nbsp;event.&nbsp;This&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;immutable&nbsp;and&nbsp;can&nbsp;only<br>
+be&nbsp;created&nbsp;by&nbsp;an&nbsp;instance&nbsp;of&nbsp;gpiod.<a href="#Line">Line</a>.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LineEvent-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(<a href="#LineEvent-type">type</a>(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="LineEvent-__repr__"><strong>__repr__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;repr(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="LineEvent-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>nsec</strong></dt>
+<dd><tt>Nanoseconds&nbsp;value&nbsp;of&nbsp;the&nbsp;line&nbsp;event&nbsp;timestamp&nbsp;(integer).</tt></dd>
+</dl>
+<dl><dt><strong>sec</strong></dt>
+<dd><tt>Seconds&nbsp;value&nbsp;of&nbsp;the&nbsp;line&nbsp;event&nbsp;timestamp&nbsp;(integer).</tt></dd>
+</dl>
+<dl><dt><strong>source</strong></dt>
+<dd><tt>Line&nbsp;object&nbsp;representing&nbsp;the&nbsp;GPIO&nbsp;line&nbsp;on&nbsp;which&nbsp;this&nbsp;event<br>
+occurred&nbsp;(gpiod.Line&nbsp;object).</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>Event&nbsp;type&nbsp;of&nbsp;this&nbsp;line&nbsp;event&nbsp;(integer).</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FALLING_EDGE</strong> = 2</dl>
+
+<dl><dt><strong>RISING_EDGE</strong> = 1</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LineIter">class <strong>LineIter</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Allows&nbsp;to&nbsp;iterate&nbsp;over&nbsp;all&nbsp;lines&nbsp;exposed&nbsp;by&nbsp;a&nbsp;GPIO&nbsp;chip.<br>
+&nbsp;<br>
+New&nbsp;line&nbsp;iterator&nbsp;is&nbsp;created&nbsp;by&nbsp;passing&nbsp;a&nbsp;reference&nbsp;to&nbsp;an&nbsp;open&nbsp;gpiod.<a href="#Chip">Chip</a><br>
+<a href="builtins.html#object">object</a>&nbsp;to&nbsp;the&nbsp;constructor&nbsp;of&nbsp;gpiod.<a href="#LineIter">LineIter</a>.<br>
+&nbsp;<br>
+Caller&nbsp;doesn't&nbsp;need&nbsp;to&nbsp;handle&nbsp;the&nbsp;resource&nbsp;management&nbsp;for&nbsp;lines&nbsp;as&nbsp;their<br>
+lifetime&nbsp;is&nbsp;managed&nbsp;by&nbsp;the&nbsp;owning&nbsp;chip.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;chip&nbsp;=&nbsp;gpiod.<a href="#Chip">Chip</a>('gpiochip0')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;line&nbsp;in&nbsp;gpiod.<a href="#LineIter">LineIter</a>(chip):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_stuff_with_line(line)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="LineIter-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="LineIter-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="LineIter-__next__"><strong>__next__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;next(self).</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="LineIter-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;<a href="builtins.html#object">object</a>.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-find_line"><strong>find_line</strong></a>(...)</dt><dd><tt><a href="#-find_line">find_line</a>(name)&nbsp;-&gt;&nbsp;gpiod.<a href="#Line">Line</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;or&nbsp;None<br>
+&nbsp;<br>
+Lookup&nbsp;a&nbsp;GPIO&nbsp;line&nbsp;by&nbsp;name.&nbsp;Search&nbsp;all&nbsp;gpiochips.&nbsp;Returns&nbsp;a&nbsp;gpiod.<a href="#Line">Line</a><br>
+or&nbsp;None&nbsp;if&nbsp;a&nbsp;line&nbsp;with&nbsp;given&nbsp;name&nbsp;doesn't&nbsp;exist&nbsp;in&nbsp;the&nbsp;system.<br>
+&nbsp;<br>
+NOTE:&nbsp;the&nbsp;gpiod.<a href="#Chip">Chip</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;owning&nbsp;the&nbsp;returned&nbsp;line&nbsp;must&nbsp;be&nbsp;closed<br>
+by&nbsp;the&nbsp;caller.<br>
+&nbsp;<br>
+&nbsp;&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Name&nbsp;of&nbsp;the&nbsp;line&nbsp;to&nbsp;find&nbsp;(string).</tt></dd></dl>
+ <dl><dt><a name="-version_string"><strong>version_string</strong></a>(...)</dt><dd><tt><a href="#-version_string">version_string</a>()&nbsp;-&gt;&nbsp;string<br>
+&nbsp;<br>
+Get&nbsp;the&nbsp;API&nbsp;version&nbsp;of&nbsp;the&nbsp;library&nbsp;as&nbsp;a&nbsp;human-readable&nbsp;string.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>LINE_REQ_DIR_AS_IS</strong> = 1<br>
+<strong>LINE_REQ_DIR_IN</strong> = 2<br>
+<strong>LINE_REQ_DIR_OUT</strong> = 3<br>
+<strong>LINE_REQ_EV_BOTH_EDGES</strong> = 6<br>
+<strong>LINE_REQ_EV_FALLING_EDGE</strong> = 4<br>
+<strong>LINE_REQ_EV_RISING_EDGE</strong> = 5<br>
+<strong>LINE_REQ_FLAG_ACTIVE_LOW</strong> = 4<br>
+<strong>LINE_REQ_FLAG_OPEN_DRAIN</strong> = 1<br>
+<strong>LINE_REQ_FLAG_OPEN_SOURCE</strong> = 2</td></tr></table>
+</body></html>

@@ -2,8 +2,9 @@ CC = gcc
 SOURCESRC = src
 BUILDSRC = build
 LIBRARY = gpiod
-
-.PHONY: clean gpio.o main test
+PYTHON = python3
+SCRIPT = scripts
+.PHONY: clean gpio.o main test py
 
 all: clean gpio.o main
 
@@ -18,3 +19,6 @@ test:
 
 clean:
 	rm -f ${BUILDSRC}/*.o ${BUILDSRC}/main
+
+py:
+	sudo ${PYTHON} ${SCRIPT}/main.py
