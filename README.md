@@ -1,6 +1,6 @@
 ## libgpio for linux
 
-- intall libgpio:
+- install libgpio:
 
 ```
 sudo apt install libgpiod-dev gpiod libgpiod-doc -y
